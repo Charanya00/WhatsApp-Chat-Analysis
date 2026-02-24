@@ -1,0 +1,104 @@
+📌 Project Prompt: WhatsApp Chat Analysis using Python & Data Science
+
+Prompt:
+
+Build a complete end-to-end Data Science project titled "WhatsApp Chat Analysis & Visualization System" using Python.
+
+The system should allow users to upload exported WhatsApp chat (.txt file) and perform advanced exploratory data analysis (EDA) with meaningful visualizations and insights.
+
+The project must include the following features:
+
+🔹 Data Preprocessing
+
+Clean and structure raw WhatsApp chat text
+
+Extract date, time, sender name, and message
+
+Handle multimedia messages and deleted messages
+
+Convert timestamps into proper datetime format
+
+🔹 Exploratory Data Analysis (EDA)
+
+Total messages sent
+
+Most active user
+
+Most active day and month
+
+Busiest hour of the day
+
+Word frequency analysis
+
+Most common emojis
+
+Most common words (excluding stopwords)
+
+🔹 Advanced Insights
+
+Sentiment analysis (positive, negative, neutral)
+
+Conversation trend over time
+
+Message response time analysis
+
+User interaction heatmap
+
+Most used emojis per user
+
+🔹 Visualizations
+
+Line charts (message timeline)
+
+Bar charts (most active users)
+
+Word cloud visualization
+
+Emoji frequency chart
+
+Calendar heatmap
+
+🔹 Technologies to Use
+
+Python
+
+Pandas
+
+NumPy
+
+Matplotlib
+
+Seaborn
+
+WordCloud
+
+NLTK or TextBlob (for sentiment analysis)
+
+Streamlit (for web app interface)
+
+🔹 Final Output
+
+A user-friendly Streamlit dashboard
+
+Clean UI to upload chat file
+
+Interactive graphs and downloadable insights
+
+🔹 Bonus Features
+
+Compare two users
+
+Detect peak argument days (based on negative sentiment spikes)
+
+Create relationship score based on interaction frequency
+
+The final system should be interactive, visually appealing, and capable of generating meaningful social insights from raw WhatsApp conversations.
+
+If you want, I can also:
+
+✅ Give you step-by-step project structure
+✅ Provide folder structure + file names
+✅ Give you complete code step-by-step
+✅ Help you explain this project confidently in interviews (important for improving your speaking skills 😉)
+
+Tell me what you want next.
