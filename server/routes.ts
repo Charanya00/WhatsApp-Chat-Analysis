@@ -4,7 +4,7 @@ import { storage } from "./storage";
 import { api, errorSchemas } from "@shared/routes";
 import { z } from "zod";
 import multer from "multer";
-import { analyzeChat } from "./chat-analyzer";
+import { analyzeChat } from "./chat-analyzer.js";
 
 // Configure multer for memory storage (file parsed in memory)
 const upload = multer({

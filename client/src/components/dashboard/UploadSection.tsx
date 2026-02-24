@@ -37,9 +37,6 @@ export function UploadSection() {
   }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.dataTransfer?.files[0]) {
-      // e.target.files fallback
-    }
     if (e.target.files && e.target.files[0]) {
        const selectedFile = e.target.files[0];
        if (selectedFile.name.endsWith('.txt')) {
