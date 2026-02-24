@@ -1,38 +1,42 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import {
+  analysisSessions,
+  type AnalysisSession,
+  type InsertSession,
+  type AnalysisMetrics
+} from "@shared/schema";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  createSession(session: InsertSession & { metrics: AnalysisMetrics }): Promise<AnalysisSession>;
+  getSession(id: number): Promise<AnalysisSession | undefined>;
+  getRecentSessions(): Promise<AnalysisSession[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async createSession(session: InsertSession & { metrics: AnalysisMetrics }): Promise<AnalysisSession> {
+    const [created] = await db.insert(analysisSessions)
+      .values({
+        filename: session.filename,
+        metrics: session.metrics as any // jsonb mapping
+      })
+      .returning();
+    return created;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getSession(id: number): Promise<AnalysisSession | undefined> {
+    const [session] = await db.select()
+      .from(analysisSessions)
+      .where(eq(analysisSessions.id, id));
+    return session;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async getRecentSessions(): Promise<AnalysisSession[]> {
+    return await db.select()
+      .from(analysisSessions)
+      .orderBy(desc(analysisSessions.createdAt))
+      .limit(10);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
